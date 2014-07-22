@@ -1,22 +1,17 @@
-QT += network
+QT += network core dbus
 
-TARGET = qatemcontrol
-TEMPLATE = lib
-
-DEFINES += LIBQATEMCONTROL_LIBRARY
-
-SOURCES += qatemconnection.cpp
-
-HEADERS += qatemconnection.h\
-        libqatemcontrol_global.h \
+HEADERS += \
+    qatemconnection.h \
+    libqatemcontrol_global.h \
     qdownstreamkeysettings.h \
     qupstreamkeysettings.h
 
-unix {
-    target.path = /usr/lib
-    INSTALLS += target
+SOURCES += \
+    main.cpp \
+    qatemconnection.cpp
 
-    header_files.files = $$HEADERS
-    header_files.path = /usr/include
-    INSTALLS += header_files
-}
+DBUS_ADAPTORS += com.blackmagicdesign.QAtemConnection.xml
+DBUS_INTERFACES += com.blackmagicdesign.QAtemConnection.xml
+
+target.path = out
+INSTALLS += target

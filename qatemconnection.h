@@ -42,6 +42,8 @@ typedef union
 class QAtemConnection : public QObject
 {
     Q_OBJECT
+    Q_CLASSINFO("D-Bus Interface", "com.blackmagicdesign.QAtemConnection")
+
 public:
     enum Command
     {
@@ -119,8 +121,10 @@ public:
 
     explicit QAtemConnection(QObject* parent = NULL);
 
+public slots:
     /// Connect to ATEM switcher at @p address
     void connectToSwitcher(const QHostAddress& address);
+    void connectToSwitcher(const QString& name);
     void disconnectFromSwitcher();
 
     void setDebugEnabled(bool enabled) { m_debugEnabled = enabled; }

@@ -16,7 +16,10 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "qatemconnection.h"
+#include "qatemconnection_adaptor.h"
+#include "qatemconnection_interface.h"
 
+#include <QApplication>
 #include <QDebug>
 #include <QTimer>
 #include <QHostAddress>
@@ -32,6 +35,11 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 QAtemConnection::QAtemConnection(QObject* parent)
     : QObject(parent)
 {
+    new QAtemConnectionAdaptor(this);
+    QDBusConnection dbus = QDBusConnection::sessionBus();
+    dbus.registerObject("/QAtemConnection", this);
+    dbus.registerService("com.blackmagicdesign.QAtemConnection");
+
     m_socket = new QUdpSocket(this);
     m_socket->setSocketOption(QAbstractSocket::LowDelayOption, 1);
 
@@ -158,6 +166,11 @@ void QAtemConnection::connectToSwitcher(const QHostAddress &address)
     m_connectionTimer->start();
 }
 
+void QAtemConnection::connectToSwitcher(const QString &address)
+{
+    connectToSwitcher(QHostAddress(address));
+}
+
 void QAtemConnection::disconnectFromSwitcher()
 {
     m_socket->close();
@@ -174,7 +187,7 @@ void QAtemConnection::handleSocketData()
 
         m_socket->readDatagram(datagram.data(), datagram.size());
 
-//        qDebug() << datagram.toHex();
+        qDebug() << datagram.toHex();
 
         QAtemConnection::CommandHeader header = parseCommandHeader(datagram);
         m_currentUid = header.uid;
@@ -313,6 +326,8 @@ bool QAtemConnection::sendDatagram(const QByteArray& datagram)
 {
     qint64 sent = m_socket->writeDatagram(datagram, m_address, m_port);
 
+    qDebug() << datagram.toHex();
+
     return sent != -1;
 }
 
@@ -364,8 +379,8 @@ void QAtemConnection::changeProgramInput(quint16 index)
     U16_U8 val;
 
     val.u16 = index;
-    payload[2] = (char)val.u8[1];
-    payload[3] = (char)val.u8[0];
+    payload[0] = (char)val.u8[1];
+    payload[1] = (char)val.u8[0];
 
     sendCommand(cmd, payload);
 }
@@ -382,8 +397,8 @@ void QAtemConnection::changePreviewInput(quint16 index)
     U16_U8 val;
 
     val.u16 = index;
-    payload[2] = (char)val.u8[1];
-    payload[3] = (char)val.u8[0];
+    payload[0] = (char)val.u8[1];
+    payload[1] = (char)val.u8[0];
 
     sendCommand(cmd, payload);
 }
@@ -3261,6 +3276,9 @@ void QAtemConnection::onFTCD(const QByteArray& payload)
 void QAtemConnection::flushTransferBuffer(quint8 count)
 {
     int i = 0;
+    struct timespec delay;
+    delay.tv_sec = 0;
+    delay.tv_nsec = 50000;
 
     while(!m_transferData.isEmpty() && i < count)
     {
@@ -3268,7 +3286,7 @@ void QAtemConnection::flushTransferBuffer(quint8 count)
         m_transferData = m_transferData.remove(0, data.size());
         sendData(m_transferId, data);
         m_socket->flush();
-        QThread::usleep(50);
+        nanosleep(&delay, NULL);
         ++i;
     }
 

@@ -1,0 +1,994 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+  <interface name="com.blackmagicdesign.QAtemConnection">
+    <signal name="connected">
+    </signal>
+    <signal name="disconnected">
+    </signal>
+    <signal name="socketError">
+      <arg name="errorString" type="s" direction="out"/>
+    </signal>
+    <signal name="programInputChanged">
+      <arg name="oldIndex" type="q" direction="out"/>
+      <arg name="newIndex" type="q" direction="out"/>
+    </signal>
+    <signal name="previewInputChanged">
+      <arg name="oldIndex" type="q" direction="out"/>
+      <arg name="newIndex" type="q" direction="out"/>
+    </signal>
+    <signal name="tallyStatesChanged">
+    </signal>
+    <signal name="transitionPreviewChanged">
+      <arg name="state" type="b" direction="out"/>
+    </signal>
+    <signal name="transitionFrameCountChanged">
+      <arg name="count" type="y" direction="out"/>
+    </signal>
+    <signal name="transitionPositionChanged">
+      <arg name="count" type="q" direction="out"/>
+    </signal>
+    <signal name="nextTransitionStyleChanged">
+      <arg name="style" type="y" direction="out"/>
+    </signal>
+    <signal name="keyersOnNextTransitionChanged">
+      <arg name="keyers" type="y" direction="out"/>
+    </signal>
+    <signal name="currentTransitionStyleChanged">
+      <arg name="style" type="y" direction="out"/>
+    </signal>
+    <signal name="keyersOnCurrentTransitionChanged">
+      <arg name="keyers" type="y" direction="out"/>
+    </signal>
+    <signal name="fadeToBlackChanged">
+      <arg name="fading" type="b" direction="out"/>
+      <arg name="enabled" type="b" direction="out"/>
+    </signal>
+    <signal name="fadeToBlackFrameCountChanged">
+      <arg name="count" type="y" direction="out"/>
+    </signal>
+    <signal name="fadeToBlackFramesChanged">
+      <arg name="frames" type="y" direction="out"/>
+    </signal>
+    <signal name="downstreamKeyOnChanged">
+      <arg name="keyer" type="y" direction="out"/>
+      <arg name="state" type="b" direction="out"/>
+    </signal>
+    <signal name="downstreamKeyTieChanged">
+      <arg name="keyer" type="y" direction="out"/>
+      <arg name="state" type="b" direction="out"/>
+    </signal>
+    <signal name="downstreamKeyFrameCountChanged">
+      <arg name="keyer" type="y" direction="out"/>
+      <arg name="count" type="y" direction="out"/>
+    </signal>
+    <signal name="downstreamKeyFramesChanged">
+      <arg name="keyer" type="y" direction="out"/>
+      <arg name="frames" type="y" direction="out"/>
+    </signal>
+    <signal name="downstreamKeySourcesChanged">
+      <arg name="keyer" type="y" direction="out"/>
+      <arg name="fill" type="q" direction="out"/>
+      <arg name="key" type="q" direction="out"/>
+    </signal>
+    <signal name="downstreamKeyInvertKeyChanged">
+      <arg name="keyer" type="y" direction="out"/>
+      <arg name="invert" type="b" direction="out"/>
+    </signal>
+    <signal name="downstreamKeyPreMultipliedChanged">
+      <arg name="keyer" type="y" direction="out"/>
+      <arg name="preMultiplied" type="b" direction="out"/>
+    </signal>
+    <signal name="downstreamKeyEnableMaskChanged">
+      <arg name="keyer" type="y" direction="out"/>
+      <arg name="enable" type="b" direction="out"/>
+    </signal>
+    <signal name="upstreamKeyOnChanged">
+      <arg name="keyer" type="y" direction="out"/>
+      <arg name="state" type="b" direction="out"/>
+    </signal>
+    <signal name="upstreamKeyTypeChanged">
+      <arg name="keyer" type="y" direction="out"/>
+      <arg name="type" type="y" direction="out"/>
+    </signal>
+    <signal name="upstreamKeyFillSourceChanged">
+      <arg name="keyer" type="y" direction="out"/>
+      <arg name="source" type="q" direction="out"/>
+    </signal>
+    <signal name="upstreamKeyKeySourceChanged">
+      <arg name="keyer" type="y" direction="out"/>
+      <arg name="source" type="q" direction="out"/>
+    </signal>
+    <signal name="upstreamKeyEnableMaskChanged">
+      <arg name="keyer" type="y" direction="out"/>
+      <arg name="enable" type="b" direction="out"/>
+    </signal>
+    <signal name="upstreamKeyLumaPreMultipliedKeyChanged">
+      <arg name="keyer" type="y" direction="out"/>
+      <arg name="preMultiplied" type="b" direction="out"/>
+    </signal>
+    <signal name="upstreamKeyLumaInvertKeyChanged">
+      <arg name="keyer" type="y" direction="out"/>
+      <arg name="invert" type="b" direction="out"/>
+    </signal>
+    <signal name="upstreamKeyChromaNarrowRangeChanged">
+      <arg name="keyer" type="y" direction="out"/>
+      <arg name="narrowRange" type="b" direction="out"/>
+    </signal>
+    <signal name="upstreamKeyPatternPatternChanged">
+      <arg name="keyer" type="y" direction="out"/>
+      <arg name="pattern" type="y" direction="out"/>
+    </signal>
+    <signal name="upstreamKeyPatternInvertPatternChanged">
+      <arg name="keyer" type="y" direction="out"/>
+      <arg name="invert" type="b" direction="out"/>
+    </signal>
+    <signal name="upstreamKeyDVEEnableDropShadowChanged">
+      <arg name="keyer" type="y" direction="out"/>
+      <arg name="enable" type="b" direction="out"/>
+    </signal>
+    <signal name="upstreamKeyDVELightSourceAltitudeChanged">
+      <arg name="keyer" type="y" direction="out"/>
+      <arg name="altitude" type="y" direction="out"/>
+    </signal>
+    <signal name="upstreamKeyDVEEnableBorderChanged">
+      <arg name="keyer" type="y" direction="out"/>
+      <arg name="enable" type="b" direction="out"/>
+    </signal>
+    <signal name="upstreamKeyDVEBorderStyleChanged">
+      <arg name="keyer" type="y" direction="out"/>
+      <arg name="style" type="y" direction="out"/>
+    </signal>
+    <signal name="upstreamKeyDVEBorderOutsideSoftenChanged">
+      <arg name="keyer" type="y" direction="out"/>
+      <arg name="soften" type="y" direction="out"/>
+    </signal>
+    <signal name="upstreamKeyDVEBorderInsideSoftenChanged">
+      <arg name="keyer" type="y" direction="out"/>
+      <arg name="soften" type="y" direction="out"/>
+    </signal>
+    <signal name="upstreamKeyDVEBorderOpacityChanged">
+      <arg name="keyer" type="y" direction="out"/>
+      <arg name="opacity" type="y" direction="out"/>
+    </signal>
+    <signal name="upstreamKeyDVERateChanged">
+      <arg name="keyer" type="y" direction="out"/>
+      <arg name="rate" type="y" direction="out"/>
+    </signal>
+    <signal name="upstreamKeyDVEKeyFrameASetChanged">
+      <arg name="keyer" type="y" direction="out"/>
+      <arg name="set" type="b" direction="out"/>
+    </signal>
+    <signal name="upstreamKeyDVEKeyFrameBSetChanged">
+      <arg name="keyer" type="y" direction="out"/>
+      <arg name="set" type="b" direction="out"/>
+    </signal>
+    <signal name="upstreamKeyEnableFlyChanged">
+      <arg name="keyer" type="y" direction="out"/>
+      <arg name="enabled" type="b" direction="out"/>
+    </signal>
+    <signal name="mediaPlayerChanged">
+      <arg name="player" type="y" direction="out"/>
+      <arg name="type" type="y" direction="out"/>
+      <arg name="still" type="y" direction="out"/>
+      <arg name="clip" type="y" direction="out"/>
+    </signal>
+    <signal name="auxSourceChanged">
+      <arg name="aux" type="y" direction="out"/>
+      <arg name="source" type="q" direction="out"/>
+    </signal>
+    <signal name="productInformationChanged">
+      <arg name="info" type="s" direction="out"/>
+    </signal>
+    <signal name="versionChanged">
+      <arg name="major" type="q" direction="out"/>
+      <arg name="minor" type="q" direction="out"/>
+    </signal>
+    <signal name="timeChanged">
+      <arg name="time" type="u" direction="out"/>
+    </signal>
+    <signal name="mixFramesChanged">
+      <arg name="frames" type="y" direction="out"/>
+    </signal>
+    <signal name="dipFramesChanged">
+      <arg name="frames" type="y" direction="out"/>
+    </signal>
+    <signal name="dipSourceChanged">
+      <arg name="source" type="q" direction="out"/>
+    </signal>
+    <signal name="wipeFramesChanged">
+      <arg name="frames" type="y" direction="out"/>
+    </signal>
+    <signal name="wipeBorderWidthChanged">
+      <arg name="width" type="q" direction="out"/>
+    </signal>
+    <signal name="wipeBorderSoftnessChanged">
+      <arg name="softness" type="q" direction="out"/>
+    </signal>
+    <signal name="wipeTypeChanged">
+      <arg name="type" type="y" direction="out"/>
+    </signal>
+    <signal name="wipeSymmetryChanged">
+      <arg name="value" type="q" direction="out"/>
+    </signal>
+    <signal name="wipeXPositionChanged">
+      <arg name="value" type="q" direction="out"/>
+    </signal>
+    <signal name="wipeYPositionChanged">
+      <arg name="value" type="q" direction="out"/>
+    </signal>
+    <signal name="wipeReverseDirectionChanged">
+      <arg name="reverse" type="b" direction="out"/>
+    </signal>
+    <signal name="wipeFlipFlopChanged">
+      <arg name="flipFlop" type="b" direction="out"/>
+    </signal>
+    <signal name="dveRateChanged">
+      <arg name="frames" type="q" direction="out"/>
+    </signal>
+    <signal name="dveEffectChanged">
+      <arg name="effect" type="y" direction="out"/>
+    </signal>
+    <signal name="dveFillSourceChanged">
+      <arg name="source" type="q" direction="out"/>
+    </signal>
+    <signal name="dveKeySourceChanged">
+      <arg name="source" type="q" direction="out"/>
+    </signal>
+    <signal name="dveEnableKeyChanged">
+      <arg name="enabled" type="b" direction="out"/>
+    </signal>
+    <signal name="dveEnablePreMultipliedKeyChanged">
+      <arg name="enabled" type="b" direction="out"/>
+    </signal>
+    <signal name="dveEnableInvertKeyChanged">
+      <arg name="enabled" type="b" direction="out"/>
+    </signal>
+    <signal name="dveReverseDirectionChanged">
+      <arg name="reverse" type="b" direction="out"/>
+    </signal>
+    <signal name="dveFlipFlopDirectionChanged">
+      <arg name="flipFlop" type="b" direction="out"/>
+    </signal>
+    <signal name="stingerSourceChanged">
+      <arg name="source" type="y" direction="out"/>
+    </signal>
+    <signal name="stingerEnablePreMultipliedKeyChanged">
+      <arg name="enabled" type="b" direction="out"/>
+    </signal>
+    <signal name="stingerEnableInvertKeyChanged">
+      <arg name="enabled" type="b" direction="out"/>
+    </signal>
+    <signal name="stingerPreRollChanged">
+      <arg name="frames" type="q" direction="out"/>
+    </signal>
+    <signal name="stingerClipDurationChanged">
+      <arg name="frames" type="q" direction="out"/>
+    </signal>
+    <signal name="stingerTriggerPointChanged">
+      <arg name="frames" type="q" direction="out"/>
+    </signal>
+    <signal name="stingerMixRateChanged">
+      <arg name="frames" type="q" direction="out"/>
+    </signal>
+    <signal name="wipeBorderSourceChanged">
+      <arg name="index" type="q" direction="out"/>
+    </signal>
+    <signal name="videoFormatChanged">
+      <arg name="format" type="y" direction="out"/>
+    </signal>
+    <signal name="videoDownConvertTypeChanged">
+      <arg name="type" type="y" direction="out"/>
+    </signal>
+    <signal name="mediaPoolClip1SizeChanged">
+      <arg name="size" type="y" direction="out"/>
+    </signal>
+    <signal name="mediaPoolClip2SizeChanged">
+      <arg name="size" type="y" direction="out"/>
+    </signal>
+    <signal name="audioMonitorEnabledChanged">
+      <arg name="enabled" type="b" direction="out"/>
+    </signal>
+    <signal name="audioMonitorMutedChanged">
+      <arg name="muted" type="b" direction="out"/>
+    </signal>
+    <signal name="audioMonitorDimmedChanged">
+      <arg name="dimmed" type="b" direction="out"/>
+    </signal>
+    <signal name="audioLevelsChanged">
+    </signal>
+    <signal name="mediaLockStateChanged">
+      <arg name="id" type="y" direction="out"/>
+      <arg name="state" type="b" direction="out"/>
+    </signal>
+    <signal name="dataTransferFinished">
+      <arg name="transferId" type="q" direction="out"/>
+    </signal>
+    <method name="connectToSwitcher">
+      <arg name="name" type="s" direction="in"/>
+    </method>
+    <method name="disconnectFromSwitcher">
+    </method>
+    <method name="setDebugEnabled">
+      <arg name="enabled" type="b" direction="in"/>
+    </method>
+    <method name="debugEnabled">
+      <arg type="b" direction="out"/>
+    </method>
+    <method name="programInput">
+      <arg type="q" direction="out"/>
+    </method>
+    <method name="previewInput">
+      <arg type="q" direction="out"/>
+    </method>
+    <method name="tallyState">
+      <arg type="y" direction="out"/>
+      <arg name="id" type="y" direction="in"/>
+    </method>
+    <method name="tallyStateCount">
+      <arg type="y" direction="out"/>
+    </method>
+    <method name="transitionPreviewEnabled">
+      <arg type="b" direction="out"/>
+    </method>
+    <method name="transitionFrameCount">
+      <arg type="y" direction="out"/>
+    </method>
+    <method name="transitionPosition">
+      <arg type="q" direction="out"/>
+    </method>
+    <method name="keyersOnNextTransition">
+      <arg type="y" direction="out"/>
+    </method>
+    <method name="nextTransitionStyle">
+      <arg type="y" direction="out"/>
+    </method>
+    <method name="keyersOnCurrentTransition">
+      <arg type="y" direction="out"/>
+    </method>
+    <method name="currentTransitionStyle">
+      <arg type="y" direction="out"/>
+    </method>
+    <method name="fadeToBlackEnabled">
+      <arg type="b" direction="out"/>
+    </method>
+    <method name="fadeToBlackFading">
+      <arg type="b" direction="out"/>
+    </method>
+    <method name="fadeToBlackFrameCount">
+      <arg type="y" direction="out"/>
+    </method>
+    <method name="fadeToBlackFrames">
+      <arg type="y" direction="out"/>
+    </method>
+    <method name="downstreamKeyOn">
+      <arg type="b" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="downstreamKeyTie">
+      <arg type="b" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="downstreamKeyFrameCount">
+      <arg type="y" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="downstreamKeyFrames">
+      <arg type="y" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="downstreamKeyFillSource">
+      <arg type="q" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="downstreamKeyKeySource">
+      <arg type="q" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="downstreamKeyInvertKey">
+      <arg type="b" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="downstreamKeyPreMultiplied">
+      <arg type="b" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="downstreamKeyClip">
+      <arg type="q" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="downstreamKeyGain">
+      <arg type="q" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="downstreamKeyEnableMask">
+      <arg type="b" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="downstreamKeyTopMask">
+      <arg type="n" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="downstreamKeyBottomMask">
+      <arg type="n" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="downstreamKeyLeftMask">
+      <arg type="n" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="downstreamKeyRightMask">
+      <arg type="n" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="upstreamKeyOn">
+      <arg type="b" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="upstreamKeyType">
+      <arg type="y" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="upstreamKeyFillSource">
+      <arg type="q" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="upstreamKeyKeySource">
+      <arg type="q" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="upstreamKeyEnableMask">
+      <arg type="b" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="upstreamKeyLumaPreMultipliedKey">
+      <arg type="b" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="upstreamKeyLumaInvertKey">
+      <arg type="b" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="upstreamKeyChromaNarrowRange">
+      <arg type="b" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="upstreamKeyPatternPattern">
+      <arg type="y" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="upstreamKeyPatternInvertPattern">
+      <arg type="b" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="upstreamKeyDVEDropShadowEnabled">
+      <arg type="b" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="upstreamKeyDVELightSourceAltitude">
+      <arg type="y" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="upstreamKeyDVEBorderEnabled">
+      <arg type="b" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="upstreamKeyDVEBorderStyle">
+      <arg type="y" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="upstreamKeyDVEBorderOutsideSoften">
+      <arg type="y" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="upstreamKeyDVEBorderInsideSoften">
+      <arg type="y" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="upstreamKeyDVEBorderOpacity">
+      <arg type="y" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="upstreamKeyDVEBorderBevelSofter">
+      <arg type="y" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="upstreamKeyDVERate">
+      <arg type="y" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="upstreamKeyDVEKeyFrameASet">
+      <arg type="b" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="upstreamKeyDVEKeyFrameBSet">
+      <arg type="b" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="upstreamKeyEnableFly">
+      <arg type="b" direction="out"/>
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="mediaPlayerType">
+      <arg type="y" direction="out"/>
+      <arg name="player" type="y" direction="in"/>
+    </method>
+    <method name="mediaPlayerSelectedStill">
+      <arg type="y" direction="out"/>
+      <arg name="player" type="y" direction="in"/>
+    </method>
+    <method name="mediaPlayerSelectedClip">
+      <arg type="y" direction="out"/>
+      <arg name="player" type="y" direction="in"/>
+    </method>
+    <method name="auxSource">
+      <arg type="q" direction="out"/>
+      <arg name="aux" type="y" direction="in"/>
+    </method>
+    <method name="productInformation">
+      <arg type="s" direction="out"/>
+    </method>
+    <method name="majorVersion">
+      <arg type="q" direction="out"/>
+    </method>
+    <method name="minorVersion">
+      <arg type="q" direction="out"/>
+    </method>
+    <method name="multiViewLayout">
+      <arg type="y" direction="out"/>
+    </method>
+    <method name="multiViewInput">
+      <arg type="y" direction="out"/>
+      <arg name="multiViewOutput" type="y" direction="in"/>
+    </method>
+    <method name="videoFormat">
+      <arg type="y" direction="out"/>
+    </method>
+    <method name="framesPerSecond">
+      <arg type="y" direction="out"/>
+    </method>
+    <method name="videoDownConvertType">
+      <arg type="y" direction="out"/>
+    </method>
+    <method name="mediaPoolClip1Size">
+      <arg type="y" direction="out"/>
+    </method>
+    <method name="mediaPoolClip2Size">
+      <arg type="y" direction="out"/>
+    </method>
+    <method name="mixFrames">
+      <arg type="y" direction="out"/>
+    </method>
+    <method name="dipFrames">
+      <arg type="y" direction="out"/>
+    </method>
+    <method name="dipSource">
+      <arg type="q" direction="out"/>
+    </method>
+    <method name="wipeFrames">
+      <arg type="y" direction="out"/>
+    </method>
+    <method name="wipeBorderSource">
+      <arg type="q" direction="out"/>
+    </method>
+    <method name="wipeBorderWidth">
+      <arg type="q" direction="out"/>
+    </method>
+    <method name="wipeBorderSoftness">
+      <arg type="q" direction="out"/>
+    </method>
+    <method name="wipeType">
+      <arg type="y" direction="out"/>
+    </method>
+    <method name="wipeSymmetry">
+      <arg type="q" direction="out"/>
+    </method>
+    <method name="wipeXPosition">
+      <arg type="q" direction="out"/>
+    </method>
+    <method name="wipeYPosition">
+      <arg type="q" direction="out"/>
+    </method>
+    <method name="wipeReverseDirection">
+      <arg type="b" direction="out"/>
+    </method>
+    <method name="wipeFlipFlop">
+      <arg type="b" direction="out"/>
+    </method>
+    <method name="dveRate">
+      <arg type="q" direction="out"/>
+    </method>
+    <method name="dveEffect">
+      <arg type="y" direction="out"/>
+    </method>
+    <method name="dveFillSource">
+      <arg type="q" direction="out"/>
+    </method>
+    <method name="dveKeySource">
+      <arg type="q" direction="out"/>
+    </method>
+    <method name="dveKeyEnabled">
+      <arg type="b" direction="out"/>
+    </method>
+    <method name="dvePreMultipliedKeyEnabled">
+      <arg type="b" direction="out"/>
+    </method>
+    <method name="dveInvertKeyEnabled">
+      <arg type="b" direction="out"/>
+    </method>
+    <method name="dveReverseDirection">
+      <arg type="b" direction="out"/>
+    </method>
+    <method name="dveFlipFlopDirection">
+      <arg type="b" direction="out"/>
+    </method>
+    <method name="stingerSource">
+      <arg type="y" direction="out"/>
+    </method>
+    <method name="stingerPreMultipliedKeyEnabled">
+      <arg type="b" direction="out"/>
+    </method>
+    <method name="stingerInvertKeyEnabled">
+      <arg type="b" direction="out"/>
+    </method>
+    <method name="stingerPreRoll">
+      <arg type="q" direction="out"/>
+    </method>
+    <method name="stingerClipDuration">
+      <arg type="q" direction="out"/>
+    </method>
+    <method name="stingerTriggerPoint">
+      <arg type="q" direction="out"/>
+    </method>
+    <method name="stingerMixRate">
+      <arg type="q" direction="out"/>
+    </method>
+    <method name="audioTallyState">
+      <arg type="b" direction="out"/>
+      <arg name="index" type="q" direction="in"/>
+    </method>
+    <method name="audioMonitorEnabled">
+      <arg type="b" direction="out"/>
+    </method>
+    <method name="audioMonitorMuted">
+      <arg type="b" direction="out"/>
+    </method>
+    <method name="audioMonitorDimmed">
+      <arg type="b" direction="out"/>
+    </method>
+    <method name="aquireMediaLock">
+      <arg type="b" direction="out"/>
+      <arg name="id" type="y" direction="in"/>
+      <arg name="index" type="y" direction="in"/>
+    </method>
+    <method name="unlockMediaLock">
+      <arg name="id" type="y" direction="in"/>
+    </method>
+    <method name="mediaLockState">
+      <arg type="b" direction="out"/>
+      <arg name="id" type="y" direction="in"/>
+    </method>
+    <method name="sendDataToSwitcher">
+      <arg type="q" direction="out"/>
+      <arg name="storeId" type="y" direction="in"/>
+      <arg name="index" type="y" direction="in"/>
+      <arg name="name" type="ay" direction="in"/>
+      <arg name="data" type="ay" direction="in"/>
+    </method>
+    <method name="transferActive">
+      <arg type="b" direction="out"/>
+    </method>
+    <method name="transferId">
+      <arg type="q" direction="out"/>
+    </method>
+    <method name="remainingTransferDataSize">
+      <arg type="i" direction="out"/>
+    </method>
+    <method name="changeProgramInput">
+      <arg name="index" type="q" direction="in"/>
+    </method>
+    <method name="changePreviewInput">
+      <arg name="index" type="q" direction="in"/>
+    </method>
+    <method name="doCut">
+    </method>
+    <method name="doAuto">
+    </method>
+    <method name="toggleFadeToBlack">
+    </method>
+    <method name="setFadeToBlackFrameRate">
+      <arg name="frames" type="y" direction="in"/>
+    </method>
+    <method name="setTransitionPosition">
+      <arg name="position" type="q" direction="in"/>
+    </method>
+    <method name="signalTransitionPositionChangeDone">
+    </method>
+    <method name="setTransitionPreview">
+      <arg name="state" type="b" direction="in"/>
+    </method>
+    <method name="setTransitionType">
+      <arg name="type" type="y" direction="in"/>
+    </method>
+    <method name="setUpstreamKeyOn">
+      <arg name="keyer" type="y" direction="in"/>
+      <arg name="state" type="b" direction="in"/>
+    </method>
+    <method name="setUpstreamKeyOnNextTransition">
+      <arg name="keyer" type="y" direction="in"/>
+      <arg name="state" type="b" direction="in"/>
+    </method>
+    <method name="setBackgroundOnNextTransition">
+      <arg name="state" type="b" direction="in"/>
+    </method>
+    <method name="setUpstreamKeyType">
+      <arg name="keyer" type="y" direction="in"/>
+      <arg name="type" type="y" direction="in"/>
+    </method>
+    <method name="setUpstreamKeyFillSource">
+      <arg name="keyer" type="y" direction="in"/>
+      <arg name="source" type="q" direction="in"/>
+    </method>
+    <method name="setUpstreamKeyKeySource">
+      <arg name="keyer" type="y" direction="in"/>
+      <arg name="source" type="q" direction="in"/>
+    </method>
+    <method name="setUpstreamKeyEnableMask">
+      <arg name="keyer" type="y" direction="in"/>
+      <arg name="enable" type="b" direction="in"/>
+    </method>
+    <method name="setUpstreamKeyLumaPreMultipliedKey">
+      <arg name="keyer" type="y" direction="in"/>
+      <arg name="preMultiplied" type="b" direction="in"/>
+    </method>
+    <method name="setUpstreamKeyLumaInvertKey">
+      <arg name="keyer" type="y" direction="in"/>
+      <arg name="invert" type="b" direction="in"/>
+    </method>
+    <method name="setUpstreamKeyChromaNarrowRange">
+      <arg name="keyer" type="y" direction="in"/>
+      <arg name="narrowRange" type="b" direction="in"/>
+    </method>
+    <method name="setUpstreamKeyPatternPattern">
+      <arg name="keyer" type="y" direction="in"/>
+      <arg name="pattern" type="y" direction="in"/>
+    </method>
+    <method name="setUpstreamKeyPatternInvertPattern">
+      <arg name="keyer" type="y" direction="in"/>
+      <arg name="invert" type="b" direction="in"/>
+    </method>
+    <method name="setUpstreamKeyDVEDropShadowEnabled">
+      <arg name="keyer" type="y" direction="in"/>
+      <arg name="enabled" type="b" direction="in"/>
+    </method>
+    <method name="setUpstreamKeyDVEBorderEnabled">
+      <arg name="keyer" type="y" direction="in"/>
+      <arg name="enabled" type="b" direction="in"/>
+    </method>
+    <method name="setUpstreamKeyDVEBorderStyle">
+      <arg name="keyer" type="y" direction="in"/>
+      <arg name="style" type="y" direction="in"/>
+    </method>
+    <method name="setUpstreamKeyDVEBorderSoften">
+      <arg name="keyer" type="y" direction="in"/>
+      <arg name="outside" type="y" direction="in"/>
+      <arg name="inside" type="y" direction="in"/>
+    </method>
+    <method name="setUpstreamKeyDVEBorderOpacity">
+      <arg name="keyer" type="y" direction="in"/>
+      <arg name="opacity" type="y" direction="in"/>
+    </method>
+    <method name="setUpstreamKeyDVEBorderBevelSoften">
+      <arg name="keyer" type="y" direction="in"/>
+      <arg name="soften" type="y" direction="in"/>
+    </method>
+    <method name="setUpstreamKeyDVERate">
+      <arg name="keyer" type="y" direction="in"/>
+      <arg name="rate" type="y" direction="in"/>
+    </method>
+    <method name="setUpstreamKeyDVEKeyFrame">
+      <arg name="keyer" type="y" direction="in"/>
+      <arg name="keyFrame" type="y" direction="in"/>
+    </method>
+    <method name="runUpstreamKeyTo">
+      <arg name="keyer" type="y" direction="in"/>
+      <arg name="position" type="y" direction="in"/>
+      <arg name="direction" type="y" direction="in"/>
+    </method>
+    <method name="setUpstreamKeyFlyEnabled">
+      <arg name="keyer" type="y" direction="in"/>
+      <arg name="enable" type="b" direction="in"/>
+    </method>
+    <method name="setDownstreamKeyOn">
+      <arg name="keyer" type="y" direction="in"/>
+      <arg name="state" type="b" direction="in"/>
+    </method>
+    <method name="setDownstreamKeyTie">
+      <arg name="keyer" type="y" direction="in"/>
+      <arg name="state" type="b" direction="in"/>
+    </method>
+    <method name="doDownstreamKeyAuto">
+      <arg name="keyer" type="y" direction="in"/>
+    </method>
+    <method name="setDownstreamKeyFillSource">
+      <arg name="keyer" type="y" direction="in"/>
+      <arg name="source" type="q" direction="in"/>
+    </method>
+    <method name="setDownstreamKeyKeySource">
+      <arg name="keyer" type="y" direction="in"/>
+      <arg name="source" type="q" direction="in"/>
+    </method>
+    <method name="setDownstreamKeyFrameRate">
+      <arg name="keyer" type="y" direction="in"/>
+      <arg name="frames" type="y" direction="in"/>
+    </method>
+    <method name="setDownstreamKeyInvertKey">
+      <arg name="keyer" type="y" direction="in"/>
+      <arg name="invert" type="b" direction="in"/>
+    </method>
+    <method name="setDownstreamKeyPreMultiplied">
+      <arg name="keyer" type="y" direction="in"/>
+      <arg name="preMultiplied" type="b" direction="in"/>
+    </method>
+    <method name="setDownstreamKeyEnableMask">
+      <arg name="keyer" type="y" direction="in"/>
+      <arg name="enable" type="b" direction="in"/>
+    </method>
+    <method name="saveSettings">
+    </method>
+    <method name="clearSettings">
+    </method>
+    <method name="setMediaPlayerSource">
+      <arg name="player" type="y" direction="in"/>
+      <arg name="clip" type="b" direction="in"/>
+      <arg name="source" type="y" direction="in"/>
+    </method>
+    <method name="setMediaPlayerLoop">
+      <arg name="player" type="y" direction="in"/>
+      <arg name="loop" type="b" direction="in"/>
+    </method>
+    <method name="setMediaPlayerPlay">
+      <arg name="player" type="y" direction="in"/>
+      <arg name="play" type="b" direction="in"/>
+    </method>
+    <method name="mediaPlayerGoToBeginning">
+      <arg name="player" type="y" direction="in"/>
+    </method>
+    <method name="mediaPlayerGoFrameBackward">
+      <arg name="player" type="y" direction="in"/>
+    </method>
+    <method name="mediaPlayerGoFrameForward">
+      <arg name="player" type="y" direction="in"/>
+    </method>
+    <method name="setMixFrames">
+      <arg name="frames" type="y" direction="in"/>
+    </method>
+    <method name="setDipFrames">
+      <arg name="frames" type="y" direction="in"/>
+    </method>
+    <method name="setDipSource">
+      <arg name="source" type="q" direction="in"/>
+    </method>
+    <method name="setWipeBorderSource">
+      <arg name="source" type="q" direction="in"/>
+    </method>
+    <method name="setWipeFrames">
+      <arg name="frames" type="y" direction="in"/>
+    </method>
+    <method name="setWipeBorderWidth">
+      <arg name="width" type="q" direction="in"/>
+    </method>
+    <method name="setWipeBorderSoftness">
+      <arg name="softness" type="q" direction="in"/>
+    </method>
+    <method name="setWipeType">
+      <arg name="type" type="y" direction="in"/>
+    </method>
+    <method name="setWipeSymmetry">
+      <arg name="value" type="q" direction="in"/>
+    </method>
+    <method name="setWipeXPosition">
+      <arg name="value" type="q" direction="in"/>
+    </method>
+    <method name="setWipeYPosition">
+      <arg name="value" type="q" direction="in"/>
+    </method>
+    <method name="setWipeReverseDirection">
+      <arg name="reverse" type="b" direction="in"/>
+    </method>
+    <method name="setWipeFlipFlop">
+      <arg name="flipFlop" type="b" direction="in"/>
+    </method>
+    <method name="setDVERate">
+      <arg name="frames" type="q" direction="in"/>
+    </method>
+    <method name="setDVEEffect">
+      <arg name="effect" type="y" direction="in"/>
+    </method>
+    <method name="setDVEFillSource">
+      <arg name="source" type="q" direction="in"/>
+    </method>
+    <method name="setDVEKeySource">
+      <arg name="source" type="q" direction="in"/>
+    </method>
+    <method name="setDVEKeyEnabled">
+      <arg name="enabled" type="b" direction="in"/>
+    </method>
+    <method name="setDVEPreMultipliedKeyEnabled">
+      <arg name="enabled" type="b" direction="in"/>
+    </method>
+    <method name="setDVEInvertKeyEnabled">
+      <arg name="enabled" type="b" direction="in"/>
+    </method>
+    <method name="setDVEReverseDirection">
+      <arg name="reverse" type="b" direction="in"/>
+    </method>
+    <method name="setDVEFlipFlopDirection">
+      <arg name="flipFlop" type="b" direction="in"/>
+    </method>
+    <method name="setStingerSource">
+      <arg name="source" type="y" direction="in"/>
+    </method>
+    <method name="setStingerPreMultipliedKeyEnabled">
+      <arg name="enabled" type="b" direction="in"/>
+    </method>
+    <method name="setStingerInvertKeyEnabled">
+      <arg name="enabled" type="b" direction="in"/>
+    </method>
+    <method name="setStingerPreRoll">
+      <arg name="frames" type="q" direction="in"/>
+    </method>
+    <method name="setStingerClipDuration">
+      <arg name="frames" type="q" direction="in"/>
+    </method>
+    <method name="setStingerTriggerPoint">
+      <arg name="frames" type="q" direction="in"/>
+    </method>
+    <method name="setStingerMixRate">
+      <arg name="frames" type="q" direction="in"/>
+    </method>
+    <method name="setAuxSource">
+      <arg name="aux" type="y" direction="in"/>
+      <arg name="source" type="q" direction="in"/>
+    </method>
+    <method name="setInputType">
+      <arg name="input" type="q" direction="in"/>
+      <arg name="type" type="y" direction="in"/>
+    </method>
+    <method name="setInputLongName">
+      <arg name="input" type="q" direction="in"/>
+      <arg name="name" type="s" direction="in"/>
+    </method>
+    <method name="setInputShortName">
+      <arg name="input" type="q" direction="in"/>
+      <arg name="name" type="s" direction="in"/>
+    </method>
+    <method name="setVideoFormat">
+      <arg name="format" type="y" direction="in"/>
+    </method>
+    <method name="setVideoDownConvertType">
+      <arg name="type" type="y" direction="in"/>
+    </method>
+    <method name="setMediaPoolClipSplit">
+      <arg name="size" type="y" direction="in"/>
+    </method>
+    <method name="setMultiViewLayout">
+      <arg name="layout" type="y" direction="in"/>
+    </method>
+    <method name="setAudioLevelsEnabled">
+      <arg name="enabled" type="b" direction="in"/>
+    </method>
+    <method name="setAudioInputState">
+      <arg name="index" type="q" direction="in"/>
+      <arg name="state" type="y" direction="in"/>
+    </method>
+    <method name="setAudioMonitorEnabled">
+      <arg name="enabled" type="b" direction="in"/>
+    </method>
+    <method name="setAudioMonitorMuted">
+      <arg name="muted" type="b" direction="in"/>
+    </method>
+    <method name="setAudioMonitorDimmed">
+      <arg name="dimmed" type="b" direction="in"/>
+    </method>
+  </interface>
+</node>
