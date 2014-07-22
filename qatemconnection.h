@@ -131,9 +131,9 @@ public slots:
     bool debugEnabled() const { return m_debugEnabled; }
 
     /// @returns the index of the input that is on program
-    quint16 programInput() const { return m_programInput; }
+    ushort programInput() const { return m_programInput; }
     /// @returns the index of the input that is on preview
-    quint16 previewInput() const { return m_previewInput; }
+    ushort previewInput() const { return m_previewInput; }
 
     /// @returns the tally state of the input @p id. 1 = program, 2 = preview and 3 = both
     quint8 tallyState(quint8 id) const;
@@ -477,8 +477,8 @@ public slots:
     static QByteArray prepImageForSwitcher(QImage &image, const int width, const int height);
 
 public slots:
-    void changeProgramInput(quint16 index);
-    void changePreviewInput(quint16 index);
+    void changeProgramInput(ushort index);
+    void changePreviewInput(ushort index);
 
     void doCut();
     void doAuto();
