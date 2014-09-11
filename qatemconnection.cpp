@@ -379,8 +379,8 @@ void QAtemConnection::changeProgramInput(quint16 index)
     U16_U8 val;
 
     val.u16 = index;
-    payload[0] = (char)val.u8[1];
-    payload[1] = (char)val.u8[0];
+    payload[2] = (char)val.u8[1];
+    payload[3] = (char)val.u8[0];
 
     sendCommand(cmd, payload);
 }
@@ -397,8 +397,8 @@ void QAtemConnection::changePreviewInput(quint16 index)
     U16_U8 val;
 
     val.u16 = index;
-    payload[0] = (char)val.u8[1];
-    payload[1] = (char)val.u8[0];
+    payload[2] = (char)val.u8[1];
+    payload[3] = (char)val.u8[0];
 
     sendCommand(cmd, payload);
 }
