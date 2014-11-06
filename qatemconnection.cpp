@@ -124,6 +124,7 @@ QAtemConnection::QAtemConnection(QObject* parent)
 
     m_majorversion = 0;
     m_minorversion = 0;
+	m_lastPacket = time(NULL);
 
     m_audioMonitorEnabled = false;
     m_audioMonitorGain = 0;
@@ -187,7 +188,9 @@ void QAtemConnection::handleSocketData()
 
         m_socket->readDatagram(datagram.data(), datagram.size());
 
-        qDebug() << datagram.toHex();
+        //qDebug() << datagram.toHex();
+		//qDebug() << ".";
+		m_lastPacket = time(NULL);
 
         QAtemConnection::CommandHeader header = parseCommandHeader(datagram);
         m_currentUid = header.uid;
@@ -305,7 +308,7 @@ void QAtemConnection::parsePayLoad(const QByteArray& datagram)
                 dbg.append(" ");
             }
 
-            qDebug() << dbg;
+            qDebug() << "UNK: " << dbg;
         }
 
         offset += size;
@@ -326,7 +329,7 @@ bool QAtemConnection::sendDatagram(const QByteArray& datagram)
 {
     qint64 sent = m_socket->writeDatagram(datagram, m_address, m_port);
 
-    qDebug() << datagram.toHex();
+    //qDebug() << datagram.toHex();
 
     return sent != -1;
 }

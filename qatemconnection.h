@@ -128,7 +128,10 @@ public slots:
     void disconnectFromSwitcher();
 
     void setDebugEnabled(bool enabled) { m_debugEnabled = enabled; }
-    bool debugEnabled() const { return m_debugEnabled; }
+    bool debugEnabled() const {
+		// hijacked to be number of seconds since last packet
+		return (time(NULL) - m_lastPacket) < 15;
+	}
 
     /// @returns the index of the input that is on program
     ushort programInput() const { return m_programInput; }
@@ -829,6 +832,7 @@ private:
     QString m_productInformation;
     quint16 m_majorversion;
     quint16 m_minorversion;
+	time_t m_lastPacket;
 
     QMap<quint16, InputInfo> m_inputInfos;
 
